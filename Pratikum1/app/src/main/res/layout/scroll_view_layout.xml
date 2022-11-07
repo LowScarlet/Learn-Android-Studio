@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:layout_margin="16dp" android:orientation="vertical">
+        <Button
+            android:id="@+id/main_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keluar" />
+        <TextView android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:padding="10dp" android:text="Contoh Android ScrollView"
+            android:textStyle="bold" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+        <Button android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:text="Contoh Android ScrollView" />
+    </LinearLayout>
+</ScrollView>

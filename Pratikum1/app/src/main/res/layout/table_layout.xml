@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:shrinkColumns="*"
+    android:stretchColumns="*" >
+    <!-- Baris 1 Kolom 1 -->
+    <Button
+        android:id="@+id/main_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Keluar" />
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=" Contoh Login"
+            android:textSize="24dp"
+            android:textStyle="bold" >
+        </TextView>
+    </TableRow>
+    <!--Baris 2 Kolom 2 -->
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserName"
+            android:textSize="16dp" />
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" >
+        </EditText>
+    </TableRow>
+    <!-- Baris 3 Kolom 3 -->
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="16dp" />
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" >
+        </EditText>
+    </TableRow>
+    <!-- Baris 4 Kolom 1 -->
+    <TableRow
+        android:id="@+id/tableRow4"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Masuk" />
+    </TableRow>
+</TableLayout>
