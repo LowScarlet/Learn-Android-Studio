@@ -1,9 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondActivity">
+    android:orientation="vertical"
+    tools:context=".SecondActivity" >
+    <TextView android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Masukkan Berat Badan" />
+    <EditText
+        android:id="@+id/berat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:ems="10"
+        android:inputType="number" >
+        <requestFocus/>
+    </EditText>
+    <TextView android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Masukkan Tinggi Badan" />
+    <EditText android:id="@+id/tinggi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+    <Button android:id="@+id/hasil"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Hasil" />
+    <TextView android:id="@+id/output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hasil" />
+    <Button android:id="@+id/back"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Back" />
+    <Button android:id="@+id/exit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Exit" />
+</LinearLayout>
