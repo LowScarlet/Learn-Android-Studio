@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="25dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. Sebutkan ibu kota Propinsi Riau!"/>
+
+    <RadioButton android:id="@+id/ans_1_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="jawaban_salah"
+        android:text="Dumai"/>
+    <RadioButton android:id="@+id/ans_1_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="jawaban_salah"
+        android:text="Batam"/>
+    <RadioButton android:id="@+id/ans_1_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="jawaban_benar"
+        android:text="Pekanbaru"/>
+    <RadioButton android:id="@+id/ans_1_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="jawaban_salah"
+        android:text="Bengkinang"/>
+
+    <TextView android:id="@+id/output"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:text="Klik Submit untuk melihat nilai!"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:onClick="go_submit"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quiz Selanjutnya"
+        android:onClick="go_next"/>
+</LinearLayout>

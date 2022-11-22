@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="25dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. Manakan kota dibawah ini yang merupakan ibu kota provinsi?"/>
+
+    <CheckBox android:id="@+id/ans_2_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bandung"
+        android:onClick="jawaban_benar"/>
+    <CheckBox android:id="@+id/ans_2_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tembilahan"
+        android:onClick="jawaban_salah"/>
+    <CheckBox android:id="@+id/ans_2_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bangkinang"
+        android:onClick="jawaban_salah"/>
+    <CheckBox android:id="@+id/ans_2_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pekanbaru"
+        android:onClick="jawaban_benar"/>
+    <CheckBox android:id="@+id/ans_2_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rumbai"
+        android:onClick="jawaban_salah"/>
+
+    <TextView android:id="@+id/output"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:text="Klik Submit untuk melihat nilai!"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:onClick="go_submit"/>
+</LinearLayout>
+
