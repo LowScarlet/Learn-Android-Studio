@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Pratikum7 - TEGAR MAULANA FAHREZA</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_aplikasi">Aplikasi</string>
+    <string name="action_bantuan">Bantuan</string>
+    <string name="action_keluar">Keluar</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+</resources>

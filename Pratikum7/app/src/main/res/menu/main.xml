@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_aplikasi"
+        android:title="@string/action_aplikasi"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_bantuan"
+        android:title="@string/action_bantuan"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_keluar"
+        android:title="@string/action_keluar"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>
