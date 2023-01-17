@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Pratikum7_5</string>
+    <string name="navigation_drwaer_open">Open Nav Drawer</string>
+    <string name="navigation_drwaer_close">Close Nav Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_header_title">LowScarlet</string>
+    <string name="nav_header_subtitle">Hello Wold!</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+
+</resources>
