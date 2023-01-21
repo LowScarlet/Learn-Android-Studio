@@ -84,6 +84,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 viewAlamat.setText(alamat);
                 viewAlamat.setPadding(5, 1, 5, 1);
                 barisTabel.addView(viewAlamat);
+
                 buttonEdit.add(i, new Button(this));
                 buttonEdit.get(i).setId(Integer.parseInt(id));
                 buttonEdit.get(i).setTag("Edit");
@@ -232,12 +233,5 @@ public class MainActivity extends Activity implements OnClickListener {
                     }
                 });
         builderInsertBiodata.show();
-    }
-}
-
-class ExecuteTaskInBackGround extends AsyncTask<Void, Void, Void> {
-    @Override
-    protected Void doInBackground(Void... voids) {
-        return null;
     }
 }

@@ -1,4 +1,4 @@
-package me.lowscarlet.pratikum9_2;
+package me.lowscarlet.pratikum9_3;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,7 +12,9 @@ public interface BiodataAPI {
     @GET("?operasi=insert")
     Call<List<DataModel>> insertDataModels(
             @Query("nama") String nama,
-            @Query("alamat") String alamat
+            @Query("alamat") String alamat,
+            @Query("hobi") String hobi,
+            @Query("pekerjaan") String pekerjaan
     ) ;
     @GET("?operasi=get")
     Call<DataModel> getDataModels(
@@ -22,7 +24,9 @@ public interface BiodataAPI {
     Call<List<DataModel>> editDataModels(
             @Query("id") Integer id,
             @Query("nama") String nama,
-            @Query("alamat") String alamat
+            @Query("alamat") String alamat,
+            @Query("hobi") String hobi,
+            @Query("pekerjaan") String pekerjaan
     );
     @GET("?operasi=delete")
     Call<List<DataModel>> deleteDataModels(
