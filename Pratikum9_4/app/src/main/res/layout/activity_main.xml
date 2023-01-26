@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="TEGAR MAULANA FAHREZA - 2110031802002"
+            android:text="Khusnul Meilani putri - 2110031802127"
     />
     <Button
             android:id="@+id/buttonTambahBarang"

@@ -1,36 +1,48 @@
-package me.lowscarlet.pratikum9_4;
+package me.lowscarlet.pratikum9_5.ui.update;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.*;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import me.lowscarlet.pratikum9_5.DataBarangAPI;
+import me.lowscarlet.pratikum9_5.DataModel;
+import me.lowscarlet.pratikum9_5.MainActivity;
+import me.lowscarlet.pratikum9_5.databinding.FragmentUpdateBinding;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import me.lowscarlet.pratikum9_5.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements OnClickListener {
-    Button buttonTambahBarang;
+public class UpdateFragment extends Fragment implements View.OnClickListener {
+
+    private FragmentUpdateBinding binding;
+
+    MainActivity MainActivity;
     ArrayList<Button> buttonEdit = new ArrayList<>();
     ArrayList<Button> buttonDelete = new ArrayList<>();
-    String baseUrl = "http://192.168.0.100/crudtest2/server.php/";
-    String[] header = {"Id", "Nama", "Alamat", "No Penjual", "Kode Barang", "Jumlah Barang", "Harga Satuan", "Diskon", "Total Harga", "Aksi"};
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentUpdateBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        MainActivity = (MainActivity) getActivity();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(MainActivity.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -41,53 +53,55 @@ public class MainActivity extends Activity implements OnClickListener {
             @Override
             public void onResponse(@NotNull Call<List<DataModel>> call, @NotNull Response<List<DataModel>> response) {
                 if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
-                renderTable(MainActivity.this, response);
+                renderTable(MainActivity, response, binding);
             }
 
             @Override
             public void onFailure(@NotNull Call<List<DataModel>> call, @NotNull Throwable t) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
+
+        return root;
     }
 
     @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.buttonTambahBarang) {
-            tambahBiodata();
-            return;
-        }
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onClick(View v) {
         for (int i = 0; i < buttonEdit.size(); i++) {
-            if (view.getId() == buttonEdit.get(i).getId() && view.getTag().toString().trim().equals("Edit")) {
+            if (v.getId() == buttonEdit.get(i).getId() && v.getTag().toString().trim().equals("Edit")) {
                 int id = buttonEdit.get(i).getId();
                 getDataByID(id);
                 return;
-            } else if (view.getId() == buttonDelete.get(i).getId() && view.getTag().toString().trim().equals("Delete")) {
+            } else if (v.getId() == buttonDelete.get(i).getId() && v.getTag().toString().trim().equals("Delete")) {
                 Integer id = buttonDelete.get(i).getId();
-                deleteBiodata(id);
+                deleteData(id);
                 return;
             }
         }
-
     }
 
-    public void renderTable(MainActivity context, Response<List<DataModel>> response) {
-        TableLayout tabelbarang = findViewById(R.id.tableBiodata);
-
-        buttonTambahBarang = findViewById(R.id.buttonTambahBarang);
-        buttonTambahBarang.setOnClickListener(context);
+    public void renderTable(MainActivity context, Response<List<DataModel>> response, FragmentUpdateBinding binding) {
+        TableLayout tabelbarang = binding.updateTable;
 
         TableRow barisTabel = new TableRow(context);
-        barisTabel.setBackgroundColor(Color.GREEN);
+        int primary_color = ContextCompat.getColor(context, R.color.purple_500);
+        barisTabel.setBackgroundColor(primary_color);
 
-        for (String x : header) {
+        for (String x : MainActivity.header) {
             TextView y = new TextView(context);
             y.setText(x);
+            y.setTextColor(ContextCompat.getColor(context, R.color.white));
             y.setPadding(5, 1, 5, 1);
             barisTabel.addView(y);
         }
@@ -135,14 +149,14 @@ public class MainActivity extends Activity implements OnClickListener {
             buttonEdit.get(i).setId(Integer.parseInt(x.getId()));
             buttonEdit.get(i).setTag("Edit");
             buttonEdit.get(i).setText("Edit");
-            buttonEdit.get(i).setOnClickListener(context);
+            buttonEdit.get(i).setOnClickListener(this);
             barisTabel.addView(buttonEdit.get(i));
 
             buttonDelete.add(i, new Button(context));
             buttonDelete.get(i).setId(Integer.parseInt(x.getId()));
             buttonDelete.get(i).setTag("Delete");
             buttonDelete.get(i).setText("Delete");
-            buttonDelete.get(i).setOnClickListener(context);
+            buttonDelete.get(i).setOnClickListener(this);
             barisTabel.addView(buttonDelete.get(i));
 
             tabelbarang.addView(barisTabel, new
@@ -151,72 +165,11 @@ public class MainActivity extends Activity implements OnClickListener {
 
             i++;
         }
+
     }
-
-    public void tambahBiodata() {
-        LinearLayout layoutInput = new LinearLayout(this);
-        layoutInput.setOrientation(LinearLayout.VERTICAL);
-
-        List<EditText> input = new ArrayList<>();
-
-        for (String x : header) {
-            final EditText y = new EditText(this);
-            if ((x != "Total Harga") & (x != "Id") & (x != "Aksi")) {
-                y.setHint(x);
-                layoutInput.addView(y);
-            }
-            input.add(y);
-        }
-
-        AlertDialog.Builder builderInsertBiodata = new AlertDialog.Builder(this);
-        builderInsertBiodata.setTitle("Insert Barang");
-        builderInsertBiodata.setView(layoutInput);
-        builderInsertBiodata.setPositiveButton("Insert", (dialog, which) -> {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            DataBarangAPI biodataapi = retrofit.create(DataBarangAPI.class);
-            Call<List<DataModel>> call = biodataapi.insertDataModels(
-                    input.get(1).getText().toString(),
-                    input.get(2).getText().toString(),
-                    input.get(3).getText().toString(),
-                    input.get(4).getText().toString(),
-                    input.get(5).getText().toString(),
-                    input.get(6).getText().toString(),
-                    input.get(7).getText().toString()
-            );
-
-            call.enqueue(new Callback<List<DataModel>>() {
-                @Override
-                public void onResponse(Call<List<DataModel>> call, Response<List<DataModel>> response) {
-                    if (!response.isSuccessful()) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
-                        toast.show();
-                        return;
-                    }
-                    Toast toast = Toast.makeText(getApplicationContext(), "Success Code: " + response.code(), Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-
-                @Override
-                public void onFailure(Call<List<DataModel>> call, Throwable t) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            });
-
-            finish();
-            startActivity(getIntent());
-        });
-        builderInsertBiodata.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-        builderInsertBiodata.show();
-    }
-
-    public void deleteBiodata(Integer id) {
+    public void deleteData(Integer id) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(MainActivity.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -227,28 +180,27 @@ public class MainActivity extends Activity implements OnClickListener {
             @Override
             public void onResponse(Call<List<DataModel>> call, Response<List<DataModel>> response) {
                 if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
-                Toast toast = Toast.makeText(getApplicationContext(), "Success Code: " + response.code(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Success Code: " + response.code(), Toast.LENGTH_SHORT);
                 toast.show();
             }
 
             @Override
             public void onFailure(Call<List<DataModel>> call, Throwable t) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
-
-        finish();
-        startActivity(getIntent());
+        MainActivity.finish();
+        startActivity(MainActivity.getIntent());
     }
 
     public void getDataByID(int id) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(MainActivity.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -259,16 +211,16 @@ public class MainActivity extends Activity implements OnClickListener {
             @Override
             public void onResponse(Call<DataModel> call, Response<DataModel> response) {
                 if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
                 DataModel datamodels = response.body();
 
-                LinearLayout layoutInput = new LinearLayout(MainActivity.this);
+                LinearLayout layoutInput = new LinearLayout(MainActivity);
                 layoutInput.setOrientation(LinearLayout.VERTICAL);
 
-                final TextView viewId = new TextView(MainActivity.this);
+                final TextView viewId = new TextView(MainActivity);
                 viewId.setText(String.valueOf(id));
                 viewId.setTextColor(Color.TRANSPARENT);
                 layoutInput.addView(viewId);
@@ -286,13 +238,13 @@ public class MainActivity extends Activity implements OnClickListener {
                 };
 
                 for (Object y : content) {
-                    final EditText z = new EditText(MainActivity.this);
+                    final EditText z = new EditText(MainActivity);
                     z.setText(y.toString());
                     layoutInput.addView(z);
                     input.add(z);
                 }
 
-                AlertDialog.Builder builderEditBiodata = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builderEditBiodata = new AlertDialog.Builder(MainActivity);
                 builderEditBiodata.setTitle("Update Barang");
                 builderEditBiodata.setView(layoutInput);
 
@@ -313,7 +265,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
             @Override
             public void onFailure(Call<DataModel> call, Throwable t) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -330,7 +282,7 @@ public class MainActivity extends Activity implements OnClickListener {
             String diskon
     ) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(MainActivity.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -350,22 +302,21 @@ public class MainActivity extends Activity implements OnClickListener {
             @Override
             public void onResponse(Call<List<DataModel>> call, Response<List<DataModel>> response) {
                 if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Error: " + response.code(), Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
-                Toast toast = Toast.makeText(getApplicationContext(), "Success Code: " + response.code(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Success Code: " + response.code(), Toast.LENGTH_SHORT);
                 toast.show();
             }
 
             @Override
             public void onFailure(Call<List<DataModel>> call, Throwable t) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivity.getApplicationContext(), "Failed: " + t.getMessage(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
-
-        finish();
-        startActivity(getIntent());
+        MainActivity.finish();
+        startActivity(MainActivity.getIntent());
     }
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/update_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        tools:context=".ui.entry.EntryFragment">
+
+    <TextView
+            android:text="UPDATE DATA"
+            android:textStyle="bold"
+            android:id="@+id/update_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:padding="20dp"
+            android:textSize="20dp"/>
+    <HorizontalScrollView
+            android:id="@+id/update_horscrl_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ScrollView
+                android:id="@+id/update_verscrl_view"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_height="wrap_content">
+            <TableLayout
+                    android:id="@+id/update_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:stretchColumns="*">
+            </TableLayout>
+        </ScrollView>
+    </HorizontalScrollView>
+</LinearLayout>

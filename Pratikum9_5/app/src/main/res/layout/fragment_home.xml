@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.entry.EntryFragment">
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="UAS PEMROGRAMAN MOBILE I"
+            android:id="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingTop="20dp"
+            android:text="TEGAR MAULANA FAHREZA"
+            android:id="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textStyle="italic"
+            android:text="2110031802002"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
